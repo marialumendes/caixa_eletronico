@@ -1,0 +1,183 @@
+<html>
+
+<head>
+
+	<script>
+		
+		var nome_do_usuario = prompt("Olá! Digte seu nome: ")
+		alert(`Olá, ${nome_do_usuario}, bem-vindo(a) ao banco Menludes`)
+	
+		var saldo = 100;
+		
+		function inicio() {
+			var escolha = parseInt(prompt('Selecione uma opção  1.) Saldo  2.) Extrato   3.) Saque  4.) Depósito  5.) Transferência  6.) Sair'));
+			switch (escolha) {
+			case 1:
+					ver_saldo();
+				break;
+				case 2:
+					extrato();
+				break;
+				case 3:
+					fazer_saque();
+				break;
+				case 4:
+					fazer_deposito();
+				break;
+				case 5:
+					transferencia();
+				break;
+				case 6:
+					sair();
+				default:
+					erro();
+					break;
+			}
+}
+		
+		function ver_saldo() {
+			autenticar_saldo();
+		}
+			function autenticar_saldo () {
+				var senha = prompt("Digite sua senha: ");
+				if (senha == "3589") {
+				alert(`Seu saldo atual é: R$ ${saldo}`);
+				inicio();
+				} else {
+					alert("Senha inválida");
+					autenticar();
+				}
+			}
+	
+			function extrato(){
+			autenticar_extrato();
+			}
+
+			function autenticar_extrato() {
+				var senha = prompt("Digite sua senha: ");
+				if (senha == "3589") {
+				alert(`Extratos do mês de março: \n 01/03 - Padaria santa massa: -390,00  \n 15/03 - Farmácia Maria das dores: -1000,00 \n 20/03 - shopee: -29,90 \n 30/03 - salário: + 6000,00`);
+				inicio();
+
+				} else {
+				alert("Senha inválida");
+				autenticar_extrato();
+			}
+			inicio();
+		} 
+
+
+
+		function fazer_deposito() {
+			autenticar_deposito();
+		}
+
+			function autenticar_deposito() {
+				var senha = prompt("Digite sua senha:");
+  			if (senha == "3589") {
+
+			var deposito = parseFloat(prompt('Qual o valor para depósito?'));
+			if (isNaN(deposito) || deposito <=0 || deposito === '') {
+				alert('Operação não autorizada');
+				fazer_deposito();
+			} else {
+				saldo += deposito;
+				ver_saldo();
+				inicio();
+			} 
+		} else {
+    	alert("Senha inválida!");
+    	autenticar_deposito();
+			}
+		}
+
+
+		function fazer_saque() {
+			autenticar_saque();
+		}
+			function autenticar_saque() {
+  			var senha = prompt("Digite sua senha:");
+  			if (senha == "3589") {
+
+			var saque = parseFloat(prompt('Qual o valor para saque?'));
+			
+			if (isNaN(saque) || saque <= 0) {
+				alert("Operação não autorizada");
+				fazer_saque();
+			} else if (saldo < saque) {
+				alert('saldo insuficiente');
+				fazer_saque();
+			} else {
+				saldo -= saque;
+				ver_saldo();
+			}
+			
+		} else {
+    	alert("Senha inválida!");
+    	autenticar();
+		}
+		}
+
+		function transferencia() {
+			autenticar_transferencia();
+		}
+			function autenticar_transferencia() {
+  			var senha = prompt("Digite sua senha:");
+  			if (senha == "3589") {
+
+			var conta = parseFloat(prompt('Para qual conta será feita a transferência?: '));
+			if (isNaN(conta)) {
+    		alert("Por favor, digite somente números.");
+			transferencia();
+  			}
+			 alert(`A conta informada foi: ${conta}. `)	
+			var trans = parseFloat(prompt(' Qual será o valor transferido? '));
+			if (isNaN(trans)) {
+    		alert("Por favor, digite somente números.");
+			transferencia();
+  			}
+			 alert(`O valor informado foi: R$ ${trans}. `)
+			 if (trans <= 0 || isNaN(saldo)) {
+				alert("Operação não autorizada");
+				transferencia();
+					} else if (saldo < trans) {
+						alert("Saldo insuficiente");
+  				transferencia();
+				} else {
+					saldo -= trans;
+					alert(`Transferencia concluida. O valor foi de R$ ${trans} para a conta ${conta}. \n Saldo disponÍvel na conta é de R$ ${saldo}`);
+				}
+			} else {
+    	alert("Senha inválida!");
+    	autenticar();
+		}
+				inicio();
+		}
+
+		
+
+		function sair() {
+			var confirma = confirm('Você deseja sair?');
+			if (confirma) {
+				alert(`${nome_do_usuario}, foi um prazer ter você por aqui.`);
+				janela.quit();
+			} else {
+				inicio();
+			}
+		}
+		
+
+		function erro() {
+			alert('Por favor, informe um número entre 1 e 6');
+			inicio();
+		}
+		
+		inicio();
+	</script>
+</head>
+
+<body>
+
+</body>
+
+</html>
